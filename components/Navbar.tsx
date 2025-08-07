@@ -17,15 +17,18 @@ const Navbar = () => {
                     <div onClick={() => setIsMobileNav(true)}>
                         <IoMenu size={30} />
                     </div>
-                    <h1 className="text-xl flex items-center gap-1 italic text-primary font-sans font-bold">
+                    <Link
+                        href="/"
+                        className="text-xl flex items-center gap-1 italic text-primary font-sans font-bold"
+                    >
                         <Image
                             src="/logo.svg"
                             width={30}
                             height={30}
                             alt="logo"
                         />
-                        FinTrack
-                    </h1>
+                        <h1>FinTrack</h1>
+                    </Link>
                 </div>
                 <div className="flex items-center gap-4">
                     <IoSearch size={25} />
