@@ -6,14 +6,32 @@ import { dashboardSummary } from "@/constants";
 import React from "react";
 
 const Tabs = () => {
-    const [tab, setTab] = useState("");
+    const [acitveTab, setActiveTab] = useState("overview");
 
     return (
         <section className="mt-16">
-            <div className="w-full pb-5 border-b-2 border-darkergray">
+            <div className="w-full space-x-8 border-b-2 border-darkergray">
                 <div className="flex items-center gap-4">
-                    <button className="text-tabs-color">Overview</button>
-                    <button className="text-tabs-color">Transactions</button>
+                    <button
+                        className={` ${
+                            acitveTab === "overview"
+                                ? "text-primary font-semibold pb-2 border-b-2 border-primary"
+                                : "font-regular text-tabs-color"
+                        }`}
+                        onClick={() => setActiveTab("overview")}
+                    >
+                        Overview
+                    </button>
+                    <button
+                        className={` ${
+                            acitveTab === "transactions"
+                                ? "text-primary font-semibold pb-2 border-b-2 border-primary"
+                                : "font-regular text-tabs-color"
+                        }`}
+                        onClick={() => setActiveTab("transactions")}
+                    >
+                        Transactions
+                    </button>
                 </div>
             </div>
 

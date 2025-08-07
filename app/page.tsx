@@ -10,7 +10,7 @@ function App() {
                 <DashboardHeading />
                 <Tabs />
             </section>
-            <div className="w-[400px] sm:w-[630px] pl-10 md:px-10 md:w-full">
+            <div className="w-[460px] sm:w-[630px] pl-10 md:px-10 md:w-full">
                 <TransactionTable />
             </div>
         </div>
