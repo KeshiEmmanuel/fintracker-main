@@ -6,6 +6,7 @@ import React from "react";
 
 const SideNavbar = () => {
     const currentPath = usePathname();
+
     console.log(currentPath);
     return (
         <nav className="hidden xl:block sticky top-20 w-full h-[calc(100vh-120px)] overflow-y-auto">
@@ -15,7 +16,7 @@ const SideNavbar = () => {
                         key={link.url}
                         className={`px-8 rounded-2xl py-2 ${
                             currentPath === link.url ? "bg-[#38677629]" : ""
-                        }`}
+                        } hover:bg-gray-200/50 transition-colors`}
                     >
                         <Link
                             href={link.url}
