@@ -15,9 +15,9 @@ const Tabs = () => {
                     <button
                         className={` ${
                             acitveTab === "overview"
-                                ? "text-primary font-semibold pb-2 border-b-2 border-primary"
-                                : "font-regular text-tabs-color"
-                        }`}
+                                ? "text-primary font-semibold border-b-2 border-primary"
+                                : "font-regular text-tabs-color pb-0"
+                        } pb-2`}
                         onClick={() => setActiveTab("overview")}
                     >
                         Overview
@@ -27,7 +27,7 @@ const Tabs = () => {
                             acitveTab === "transactions"
                                 ? "text-primary font-semibold pb-2 border-b-2 border-primary"
                                 : "font-regular text-tabs-color"
-                        }`}
+                        } pb-2 `}
                         onClick={() => setActiveTab("transactions")}
                     >
                         Transactions

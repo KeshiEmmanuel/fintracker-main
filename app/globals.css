@@ -54,6 +54,9 @@
 body {
     background-color: #fcfcfc;
 }
+::-webkit-scrollbar {
+    display: none;
+}
 .globalGridLayout {
     display: grid;
     /* padding-inline: 2rem; */

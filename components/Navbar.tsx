@@ -2,6 +2,7 @@
 import { AiOutlineAppstore } from "react-icons/ai";
 import { IoMenu, IoSearch } from "react-icons/io5";
 import RoundedImage from "./RoundedImage";
+import Image from "next/image";
 import { Links } from "@/constants";
 import Link from "next/link";
 import { useState } from "react";
@@ -16,8 +17,14 @@ const Navbar = () => {
                     <div onClick={() => setIsMobileNav(true)}>
                         <IoMenu size={30} />
                     </div>
-                    <h1 className="text-xl italic text-primary font-sans">
-                        Fintrack
+                    <h1 className="text-xl flex items-center gap-1 italic text-primary font-sans font-bold">
+                        <Image
+                            src="/logo.svg"
+                            width={30}
+                            height={30}
+                            alt="logo"
+                        />
+                        FinTrack
                     </h1>
                 </div>
                 <div className="flex items-center gap-4">
