@@ -1,30 +1,67 @@
-import Image from "next/image";
+"use client";
 import { AiOutlineAppstore } from "react-icons/ai";
 import { IoMenu, IoSearch } from "react-icons/io5";
+import RoundedImage from "./RoundedImage";
+import { Links } from "@/constants";
+import Link from "next/link";
+import { useState } from "react";
 
 const Navbar = () => {
+    const [isMobileNav, setIsMobileNav] = useState(false);
     return (
-        <nav>
-            <div>
-                <div>
-                    <IoMenu />
+        <section className="fixed w-full bg-[#fcfcfc] z-30">
+            <nav className="flex justify-between py-4 max-container">
+                <div className="flex items-center gap-2">
+                    <div onClick={() => setIsMobileNav(true)}>
+                        <IoMenu size={30} />
+                    </div>
+                    <h1 className="text-xl italic text-primary font-sans">
+                        Fintrack
+                    </h1>
                 </div>
-                <h1>Fintracker</h1>
-            </div>
-            <div>
-                <IoSearch />
-                <AiOutlineAppstore />
-                <div>
-                    <Image
-                        src="/userProfile.png"
-                        width={40}
-                        height={40}
-                        alt={"userProfile"}
-                    />
+                <div className="flex items-center gap-4">
+                    <IoSearch size={25} />
+                    <AiOutlineAppstore size={25} />
+                    <div>
+                        <RoundedImage
+                            source="/userProfile.png"
+                            width={40}
+                            height={40}
+                        />
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+            {isMobileNav && (
+                <MobileNav onClose={(bool) => setIsMobileNav(bool)} />
+            )}
+        </section>
     );
 };
+
+type MobileProps = {
+    onClose: (value: boolean) => void;
+};
+
+function MobileNav({ onClose }: MobileProps) {
+    return (
+        <nav className="absolute bg-darkergray h-screen w-[60%] z-50 xl:hidden">
+            <ul className="mt-5 flex flex-col gap-2">
+                {Links.map((link) => (
+                    <li key={link.url} className="px-8 rounded-xl py-2">
+                        <Link
+                            href={link.url}
+                            key={link.url}
+                            className="font-sans font-meduim"
+                        >
+                            {link.label}
+                        </Link>
+                    </li>
+                ))}
+            </ul>
+
+            <button onClick={() => onClose(false)}>Close</button>
+        </nav>
+    );
+}
 
 export default Navbar;

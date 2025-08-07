@@ -1,5 +1,9 @@
 const GlobalGridLayout = ({ children }: { children: React.ReactNode }) => {
-    return <main className="globalGridLayout">{children}</main>;
+    return (
+        <section className="globalGridLayout">
+            {children}
+        </section>
+    );
 };
 
 export default GlobalGridLayout;

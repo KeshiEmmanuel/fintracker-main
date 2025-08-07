@@ -3,6 +3,7 @@ import { Public_Sans } from "next/font/google";
 import "./globals.css";
 import SideNavbar from "@/components/SideNavbar";
 import Navbar from "@/components/Navbar";
+import GlobalGridLayout from "@/components/GlobalGridLayout";
 
 const publicSans = Public_Sans({
     variable: "--font-public-sans",
@@ -22,9 +23,13 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${publicSans.variable} antialiased`}>
-                <Navbar />
-                <SideNavbar />
-                {children}
+                <main>
+                    <Navbar />
+                    <GlobalGridLayout>
+                        <SideNavbar />
+                        {children}
+                    </GlobalGridLayout>
+                </main>
             </body>
         </html>
     );
