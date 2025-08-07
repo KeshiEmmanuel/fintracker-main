@@ -10,7 +10,7 @@ const NotFound = () => {
                     Oops!
                 </h1>
                 <p className="text-center mt-4 text-primary text-2xl">
-                    we couldn't find the page you are looking for
+                    we couldn&apos;t find the page you are looking for
                 </p>
 
                 <Link

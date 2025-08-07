@@ -18,7 +18,7 @@ type SortDirection = "asc" | "desc";
 function TransactionTable() {
     const [sortField, setSortField] = useState("");
     const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
 
     const sortedTransactions = useMemo(() => {
         return [...Transactions].sort((a, b) => {
@@ -66,54 +66,62 @@ function TransactionTable() {
         );
     };
     return (
-        <section className="mt-10">
-            <Table>
-                <TableHeader>
-                    <TableRow>
-                        <TableHead
-                            className="w-[600px]"
-                            onClick={() => handleSort("date")}
-                        >
-                            <div className="flex items-center gap-1">
-                                Date
-                                {getSortIcon("date")}
-                            </div>
-                        </TableHead>
-                        <TableHead
-                            className="w-[100px]"
-                            onClick={() => handleSort("remark")}
-                        >
-                            <div className="flex items-center gap-1">
-                                Remark
-                                {getSortIcon("remark")}
-                            </div>
-                        </TableHead>
-                        <TableHead
-                            className="w-[100px]"
-                            onClick={() => handleSort("amount")}
-                        >
-                            <div className="flex items-center gap-1">
-                                {" "}
-                                Amount
-                                {getSortIcon("amount")}
-                            </div>
-                        </TableHead>
-                        <TableHead className="w-[100px]">Currency</TableHead>
-                        <TableHead className="w-[100px]">Type</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {!sortedTransactions ? (
+        <section className="mt-10 w-full">
+            <div className="overflow-x-auto">
+                <Table className="min-w-full">
+                    <TableHeader>
                         <TableRow>
-                            <TableCell>Loading...</TableCell>
+                            <TableHead
+                                className="min-w-[120px] sm:w-[600px]"
+                                onClick={() => handleSort("date")}
+                            >
+                                <div className="flex items-center gap-1">
+                                    Date
+                                    {getSortIcon("date")}
+                                </div>
+                            </TableHead>
+                            <TableHead
+                                className="min-w-[80px] sm:w-[100px]"
+                                onClick={() => handleSort("remark")}
+                            >
+                                <div className="flex items-center gap-1">
+                                    Remark
+                                    {getSortIcon("remark")}
+                                </div>
+                            </TableHead>
+                            <TableHead
+                                className="min-w-[80px] sm:w-[100px]"
+                                onClick={() => handleSort("amount")}
+                            >
+                                <div className="flex items-center gap-1">
+                                    Amount
+                                    {getSortIcon("amount")}
+                                </div>
+                            </TableHead>
+                            <TableHead className="min-w-[80px] sm:w-[100px]">
+                                Currency
+                            </TableHead>
+                            <TableHead className="min-w-[70px] sm:w-[100px]">
+                                Type
+                            </TableHead>
                         </TableRow>
-                    ) : (
-                        sortedTransactions.map((invoice) => (
-                            <TransactionRow {...invoice} key={invoice.id} />
-                        ))
-                    )}
-                </TableBody>
-            </Table>
+                    </TableHeader>
+                    <TableBody>
+                        {/* Simulating Loading State */}
+                        {!sortedTransactions ? (
+                            <TableRow>
+                                <TableCell colSpan={5} className="text-center">
+                                    Loading...
+                                </TableCell>
+                            </TableRow>
+                        ) : (
+                            sortedTransactions.map((invoice) => (
+                                <TransactionRow {...invoice} key={invoice.id} />
+                            ))
+                        )}
+                    </TableBody>
+                </Table>
+            </div>
         </section>
     );
 }
