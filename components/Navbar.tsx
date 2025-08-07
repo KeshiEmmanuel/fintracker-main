@@ -5,6 +5,7 @@ import RoundedImage from "./RoundedImage";
 import { Links } from "@/constants";
 import Link from "next/link";
 import { useState } from "react";
+import { MdClose } from "react-icons/md";
 
 const Navbar = () => {
     const [isMobileNav, setIsMobileNav] = useState(false);
@@ -59,7 +60,12 @@ function MobileNav({ onClose }: MobileProps) {
                 ))}
             </ul>
 
-            <button onClick={() => onClose(false)}>Close</button>
+            <button
+                className="absolute -top-12 -right-40 bg-transparent backdrop-blur-3xl p-2 rounded-full z-50"
+                onClick={() => onClose(false)}
+            >
+                <MdClose size={30} />
+            </button>
         </nav>
     );
 }

@@ -44,12 +44,12 @@
 
 @theme {
     --color-primary: #437d8e;
-    --color-gray: #eaeff0;
+    --color-gray: #34616f17;
     --color-darkergray: #d8dfe0;
     --color-dh-btn: #4b8b9f;
     --color-tabs-color: #6d797c;
     --color-heading-color: #1b2528;
-    --color-card-body-color: #eaeff0;
+    --color-card-body-color: #34616f17;
 }
 body {
     background-color: #fcfcfc;

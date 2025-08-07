@@ -5,7 +5,7 @@ const DashboardHeading = () => {
     const allLedgers = ["Wallet Ledger", "All Ledger"];
     return (
         <section className="">
-            <div className="flex flex-col gap-6 pt-5 lg:gap-0 lg:flex-row lg:justify-between items-center">
+            <div className="flex flex-col gap-6 pt-5 lg:gap-0 lg:flex-row lg:justify-between lg:items-center">
                 <div className="flex items-center gap-2">
                     <select className="text-[44px] font-bold text-heading-color">
                         {allLedgers.map((ledger, index) => (

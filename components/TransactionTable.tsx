@@ -1,76 +1,120 @@
+"use client";
+import { useMemo, useState } from "react";
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
 import { Transactions } from "@/constants";
-import { Badge } from "./ui/badge";
+
+import TransactionRow from "./TransactionRow";
+import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react";
+type SortField = "date" | "remark" | "amount";
+type SortDirection = "asc" | "desc";
+
 function TransactionTable() {
-    function formatAmount(amount: string): string {
-        const amountToString = amount.includes("-")
-            ? amount.slice(amount.indexOf("-"), 1) + "$" + amount.slice(1)
-            : `$${amount}`;
-        return amountToString;
-    }
+    const [sortField, setSortField] = useState("");
+    const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
+    const [isLoading, setIsLoading] = useState(false);
 
-    console.log(formatAmount("2000"));
+    const sortedTransactions = useMemo(() => {
+        return [...Transactions].sort((a, b) => {
+            let aValue: string | number;
+            let bValue: string | number;
 
+            switch (sortField) {
+                case "date":
+                    aValue = new Date(a.date).getTime();
+                    bValue = new Date(b.date).getTime();
+                    break;
+                case "remark":
+                    aValue = a.remark.toLowerCase();
+                    bValue = b.remark.toLowerCase();
+                    break;
+                case "amount":
+                    aValue = Math.abs(a.amount);
+                    bValue = Math.abs(b.amount);
+                    break;
+                default:
+                    return 0;
+            }
+
+            if (aValue < bValue) return sortDirection === "asc" ? -1 : 1;
+            if (aValue > bValue) return sortDirection === "asc" ? 1 : -1;
+            return 0;
+        });
+    }, [sortField, sortDirection]);
+
+    const handleSort = (field: SortField) => {
+        if (sortField === field) {
+            setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+        } else {
+            setSortField(field);
+            setSortDirection("desc");
+        }
+    };
+
+    const getSortIcon = (field: SortField) => {
+        if (sortField !== field) return <ArrowUpDown className="w-4 h-4" />;
+        return sortDirection === "asc" ? (
+            <ArrowUp className="w-4 h-4" />
+        ) : (
+            <ArrowDown className="w-4 h-4" />
+        );
+    };
     return (
         <section className="mt-10">
             <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="w-[600px]">Date</TableHead>
-                        <TableHead>Remark</TableHead>
-                        <TableHead className="w-[100px]">Amount</TableHead>
+                        <TableHead
+                            className="w-[600px]"
+                            onClick={() => handleSort("date")}
+                        >
+                            <div className="flex items-center gap-1">
+                                Date
+                                {getSortIcon("date")}
+                            </div>
+                        </TableHead>
+                        <TableHead
+                            className="w-[100px]"
+                            onClick={() => handleSort("remark")}
+                        >
+                            <div className="flex items-center gap-1">
+                                Remark
+                                {getSortIcon("remark")}
+                            </div>
+                        </TableHead>
+                        <TableHead
+                            className="w-[100px]"
+                            onClick={() => handleSort("amount")}
+                        >
+                            <div className="flex items-center gap-1">
+                                {" "}
+                                Amount
+                                {getSortIcon("amount")}
+                            </div>
+                        </TableHead>
                         <TableHead className="w-[100px]">Currency</TableHead>
                         <TableHead className="w-[100px]">Type</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {!Transactions ? (
+                    {!sortedTransactions ? (
                         <TableRow>
                             <TableCell>Loading...</TableCell>
                         </TableRow>
                     ) : (
-                        Transactions.map((invoice) => (
-                            <TableRow key={invoice.id}>
-                                <TableCell>{invoice.date}</TableCell>
-                                <TableCell>{invoice.remark}</TableCell>
-                                <TableCell className="w-[100px]">
-                                    {formatAmount(
-                                        invoice.amount.toLocaleString("en-US")
-                                    )}
-                                </TableCell>
-                                <TableCell className="w-[100px]">
-                                    {invoice.currency}
-                                </TableCell>
-                                <TableCell className="w-[100px]">
-                                    <TypeIndicator type={invoice.type} />
-                                </TableCell>
-                            </TableRow>
+                        sortedTransactions.map((invoice) => (
+                            <TransactionRow {...invoice} key={invoice.id} />
                         ))
                     )}
                 </TableBody>
             </Table>
         </section>
-    );
-}
-
-function TypeIndicator({ type }: { type: "Debit" | "Credit" }) {
-    return (
-        <Badge className="bg-[#eaeff0] text-gray-600">
-            <div
-                className={`${
-                    type === "Debit" ? "bg-red-500" : "bg-green-500"
-                } w-2 h-2 rounded-full`}
-            />{" "}
-            {type}
-        </Badge>
     );
 }
 
