@@ -9,15 +9,13 @@ A modern, responsive financial dashboard built with React, TypeScript, and Next.
 
 
 ## 🚀 Live Demo
-
-View Live Application (Replace with your actual deployment URL)
+ [View Live Application](https://fintracker-main.vercel.app/)
 
 ## 📸 Screenshots
 
-Desktop View
-Show Image
-Mobile View
-Show Image
+### Desktop View
+<img width="1920" height="928" alt="fintrackclone" src="https://github.com/user-attachments/assets/bd27cb1e-12e2-499c-8cea-7c6a766c35bf" />
+
 
 ## ✨ Features
 
